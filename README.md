@@ -26,6 +26,16 @@ The quote assistant and contact form use **Netlify Forms** instead of a backend 
 - Form submissions are captured by Netlify automatically
 - Spam protection via built-in honeypot field
 
+### Implementation (Next.js Runtime v5)
+
+This site uses the `@netlify/plugin-nextjs@5` runtime, which requires a specific migration for Netlify Forms:
+
+- **Static form definition**: `public/__forms.html` contains the form schema with `data-netlify="true"` for Netlify to detect at build time
+- **JavaScript submission**: The client-side `ContactBot` component submits to `/__forms.html` via FormData with `form-name=owen-contact`
+- **No React forms**: No `data-netlify` attributes in React/Next.js components (they are ignored by the v5 plugin)
+
+For more details, see the [Netlify Forms migration guide](https://ntl.fyi/next-runtime-forms-migration).
+
 ### Setting up notifications (after deployment)
 
 After deploying to Netlify, you must configure email notifications:

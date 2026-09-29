@@ -148,7 +148,7 @@ export function ContactBot() {
         formData.append("email", normalized.email);
       }
 
-      const res = await fetch("/", {
+      const res = await fetch("/__forms.html", {
         method: "POST",
         body: formData,
       });

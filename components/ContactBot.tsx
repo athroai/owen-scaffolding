@@ -137,18 +137,24 @@ export function ContactBot() {
 
     setSubmitting(true);
     try {
-      const res = await fetch("/api/contact", {
+      const formData = new FormData();
+      formData.append("form-name", "owen-contact");
+      formData.append("jobType", normalized.jobType);
+      formData.append("jobSize", normalized.jobSize);
+      formData.append("location", normalized.location);
+      formData.append("name", normalized.name);
+      formData.append("phone", normalized.phone);
+      if (normalized.email) {
+        formData.append("email", normalized.email);
+      }
+
+      const res = await fetch("/", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(normalized),
+        body: formData,
       });
-      const body = await res.json().catch(() => ({}));
+
       if (!res.ok) {
-        setError(
-          typeof body.error === "string"
-            ? body.error
-            : "Something went wrong. Please call 07890 055319."
-        );
+        setError("Something went wrong. Please call 07890 055319.");
         return;
       }
       setDone(true);

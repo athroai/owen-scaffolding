@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Owen Scaffolding
+
+A Next.js marketing site for Owen Scaffolding, deployed on Netlify.
 
 ## Getting Started
 
@@ -16,21 +18,26 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Contact Form (Netlify Forms)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The quote assistant and contact form use **Netlify Forms** instead of a backend API. This means:
 
-## Learn More
+- No SMTP credentials needed
+- Form submissions are captured by Netlify automatically
+- Spam protection via built-in honeypot field
 
-To learn more about Next.js, take a look at the following resources:
+### Setting up notifications (after deployment)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+After deploying to Netlify, you must configure email notifications:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Go to your Netlify dashboard → **Forms**
+2. Select the **owen-contact** form
+3. Click **Settings and usage** → **Form notifications**
+4. Add an **Email notification** to `owenscaffolding@hotmail.com`
+5. Submit a test quote to verify notifications are working
 
-## Deploy on Vercel
+Without this step, form submissions will be stored in Netlify but no email will be sent.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy on Netlify
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This site is configured for Netlify deployment. The contact form requires the static HTML form element (already present in `app/contact/page.tsx`) for Netlify to detect it at build time.
